@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../resources/resources.dart';
-import '../widgets/password.dart';
-import '../widgets/user_name.dart';
+import '../widgets/password_text_field.dart';
+import '../widgets/login_text_field.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -14,7 +14,7 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
-  Image resultatImage = Image.asset(Images.transparency);
+  String resultatImage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +25,19 @@ class _AuthPageState extends State<AuthPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ResultImage(resultatImage),
-              UserName(nameController),
-              Password(passwordController),
+              LoginTextField(nameController),
+              PasswordTextField(passwordController),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  if (nameController.text.characters.length < 6 &&
+                  if (nameController.text.characters.length < 6 ||
                       passwordController.text.characters.length < 6) {
                     setState(() {
-                      resultatImage = Image.asset(Images.redLock);
+                      resultatImage = Images.redLock;
                     });
                   } else {
                     setState(() {
-                      resultatImage = Image.asset(Images.greenLock);
+                      resultatImage = Images.greenLock;
                     });
                   }
                 },
@@ -52,16 +52,16 @@ class _AuthPageState extends State<AuthPage> {
 }
 
 class ResultImage extends StatelessWidget {
-  const ResultImage(this.resultImage, {super.key});
+   const ResultImage(this.resultImage, {super.key});
 
-  final Image resultImage;
+   final String resultImage;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 100,
       height: 100,
-      child: resultImage,
+      child: Image.asset(resultImage.isEmpty ? Images.transparency : resultImage),
     );
   }
 }

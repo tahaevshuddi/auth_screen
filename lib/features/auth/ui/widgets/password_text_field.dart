@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-class UserName extends StatelessWidget {
-  const UserName(this.controller, {super.key});
-
+class PasswordTextField extends StatelessWidget {
+  const PasswordTextField(this.controller, {super.key});
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(15),
+    return  Padding(
+      padding: const EdgeInsets.all(15),
       child: TextField(
-        decoration: InputDecoration(
+        controller: controller,
+        obscureText: true,
+        decoration: const InputDecoration(
           helperText: 'Не менее 6 символов',
           helperStyle: TextStyle(color: Colors.black),
-          labelText: 'Имя пользователя',
+          labelText: 'Пароль',
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(15),
